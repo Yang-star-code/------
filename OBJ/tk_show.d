@@ -56,6 +56,7 @@
 ..\obj\tk_show.o: ..\CONFIG\BSP\bsp_air.h
 ..\obj\tk_show.o: ..\CONFIG\BSP\bsp_step_motor.h
 ..\obj\tk_show.o: ..\CONFIG\BSP\bsp_oled.h
+..\obj\tk_show.o: ..\CONFIG\BSP\bsp_key.h
 ..\obj\tk_show.o: ..\CONFIG\FreeRTOS\include\Queue.h
 ..\obj\tk_show.o: D:\Keil5 5.36\ARM\ARMCC\Bin\..\include\String.h
 ..\obj\tk_show.o: ..\CONFIG\MODEULE\md_s_curve.h

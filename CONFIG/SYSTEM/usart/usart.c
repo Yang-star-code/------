@@ -95,7 +95,7 @@ void usart1_init(u32 bound){
 	
 }
 
-int data;
+char data;
 void USART1_IRQHandler(void)                	//串口1中断服务程序
 {
 	if(USART_GetITStatus(USART1, USART_IT_RXNE) == SET)   

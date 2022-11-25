@@ -17,6 +17,7 @@ typedef enum Moving_State
     MOBILE,
     RECORD,
     SHOW,
+	  BACK,
     Display_Speed,
 
 }Moving_State;

@@ -56,6 +56,7 @@
 ..\obj\bsp_ads1115.o: ..\CONFIG\BSP\bsp_air.h
 ..\obj\bsp_ads1115.o: ..\CONFIG\BSP\bsp_step_motor.h
 ..\obj\bsp_ads1115.o: ..\CONFIG\BSP\bsp_oled.h
+..\obj\bsp_ads1115.o: ..\CONFIG\BSP\bsp_key.h
 ..\obj\bsp_ads1115.o: ..\CONFIG\FreeRTOS\include\Queue.h
 ..\obj\bsp_ads1115.o: D:\Keil5 5.36\ARM\ARMCC\Bin\..\include\String.h
 ..\obj\bsp_ads1115.o: ..\CONFIG\MODEULE\md_s_curve.h

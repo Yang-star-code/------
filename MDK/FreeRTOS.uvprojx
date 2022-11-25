@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F40_41xxx,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CONFIG\FreeRTOS;..\CONFIG\FreeRTOS\include;..\CONFIG\FreeRTOS\portable\RVDS\ARM_CM4F;..\CONFIG\CORE;..\CONFIG\SYSTEM\delay;..\CONFIG\SYSTEM\sys;..\CONFIG\FWLIB\inc;..\CONFIG\BSP;..\MDK;..\CONFIG\MODEULE;..\CONFIG\TASK;..\CONFIG\SYSTEM\usart</IncludePath>
+              <IncludePath>..\CONFIG\FreeRTOS;..\CONFIG\FreeRTOS\include;..\CONFIG\FreeRTOS\portable\RVDS\ARM_CM4F;..\CONFIG\CORE;..\CONFIG\SYSTEM\delay;..\CONFIG\SYSTEM\sys;..\CONFIG\FWLIB\inc;..\MDK;..\CONFIG\MODEULE;..\CONFIG\TASK;..\CONFIG\SYSTEM\usart;..\CONFIG\BSP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -658,6 +658,16 @@
               <FileName>picture.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\CONFIG\BSP\picture.h</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CONFIG\BSP\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_key.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\CONFIG\BSP\bsp_key.h</FilePath>
             </File>
           </Files>
         </Group>

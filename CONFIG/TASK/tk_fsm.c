@@ -9,6 +9,7 @@
 #define  C_Y_P   4614
 #define  D_X_P   1542
 #define  D_Y_P   5256
+int ALL_POINT=4;//执行的总点数
 
 Robot_State RobotState;
 Motor_State MotorState;
@@ -24,6 +25,7 @@ extern int Y_Total_Count;
 float Initial_Height=3;//初始高度
 float total_time;
 float i=1.0;
+u8 key=0;
 int task=0;
 int First_In=0;
 //Current_Height（0-50）   Before_Style_Time   Style_State 		Lifting_Speed 				After_Style_Time 
@@ -82,6 +84,11 @@ void FSM(void *pvParameters)
     {
 			//i=lvbo(0xeb,0x82);
 			//i++;
+		key=KEY_Scan(1);	
+			if(key>0)
+			{
+				RobotState.MovingState=BACK;
+			}
     if(AIR_R_SHORT==1000)
     {
         RobotState.MovingState=STOP;//开机按键上拨默认停止状态
@@ -108,14 +115,16 @@ void FSM(void *pvParameters)
 //--------------------------------------FSM
     else if(AIR_L_LONG==1500)
     {
-        RobotState.VelocityMode=FINE_TURNING_MODE;
+      RobotState.VelocityMode=FINE_TURNING_MODE;
 			RobotState.RecordState.Show_Switch=Ok;
     }
 //--------------------------------------FSM
     else if(AIR_L_LONG>=1900)
     {
         RobotState.MovingState=SHOW;//根据记录点，顺序跑完位置
+			  key=0;//如果演示开始就不能重置
         RobotState.RecordState.Record_Close_Switch=No;
+			  
     }
 		if(AIR_R_SHORT>=1900&&AIR_R_LONG>=1900)
     {
@@ -173,21 +182,19 @@ void FSM(void *pvParameters)
    
         }break;
 //--------------------------------------Switch 
+				 case BACK:           
+        {
+            Back_To_Start_Demo(&RECORD_PTR[ALL_POINT-1]);//最后记录完还加了一，所以要减一  先回程,adjust for x,y,to the initial				
+						vTaskDelay(500);//The pause time of each point.
+   
+        }break;
+				
         case SHOW:
         {
 					  vTaskResume(Show_Handle);
             if(RobotState.RecordState.Show_Switch==Ok)
         {
             int n;
-					if(First_In>0)
-					{
-            Back_To_Start_Demo(&RECORD_PTR[4-1]);//最后记录完还加了一，所以要减一  先回程,adjust for x,y,to the initial
-					}
-					else
-					{
-						First_In++;
-					}
-						vTaskDelay(500);//The pause time of each point.
             for(n=0;n<4;n++)
 					{
 						task=n;

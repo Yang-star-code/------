@@ -38,6 +38,7 @@
 "..\obj\bsp_air.o"
 "..\obj\bsp_oled.o"
 "..\obj\bsp_pid.o"
+"..\obj\bsp_key.o"
 "..\obj\md_s_curve.o"
 "..\obj\tk_fsm.o"
 "..\obj\tk_information.o"

@@ -15,6 +15,7 @@
 #include "bsp_air.h"
 #include "bsp_step_motor.h"
 #include "bsp_oled.h"
+#include "bsp_key.h"
 
 //memcpyº¯Êý
 #include "Queue.h"

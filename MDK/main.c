@@ -33,16 +33,17 @@ void startTask(void *pvParameters)
 void BSP_INIT(void)
 {
 	//基本功能
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断分组
-	delay_init(168);                                //初始化延时函数
+	  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断分组
+	  delay_init(168);                                //初始化延时函数
     RobotStateInit();                               //机器人状态初始化
-	usart1_init(115200);                            //初始化串口
+	  usart1_init(115200);                            //初始化串口
     bsp_Air_Init();                                 //航模遥控
     bsp_ADS1115_Init();                             //压力传感器
     bsp_ALL_GPIO_Init();                            //电机GPIO配置
     bsp_XY_TIM3_Config();                           //xy电机定时器配置
 		z_init();
 		r_init(); 
+	  KEY_Init();
 	#if (USE_OLED==Config)
     bsp_I2C_OLED_Init();
 	  bsp_OLED_Init();
