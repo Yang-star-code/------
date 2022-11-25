@@ -1,15 +1,23 @@
 #include "include.h"
 #include "picture.h"
 
-#define  A_X_P   1452
-#define  A_Y_P   1794
-#define  B_X_P   1542
-#define  B_Y_P   3570
-#define  C_X_P   1542
-#define  C_Y_P   4614
-#define  D_X_P   1542
-#define  D_Y_P   5256
-int ALL_POINT=4;//执行的总点数
+#define  A_Y_P   1433
+#define  B_Y_P   1481
+#define  B_Y_P_P 1481
+#define  C_Y_P   1481
+#define  C_Y_P_P 1481
+#define  D_Y_P   1500
+
+
+#define  A_X_P   1803
+#define  B_X_P   3594
+#define  B_X_P_P 3794
+#define  C_X_P_P 4325
+#define  C_X_P   4625
+#define  D_X_P   5265
+int ALL_POINT=10;//执行的总点数
+
+
 
 Robot_State RobotState;
 Motor_State MotorState;
@@ -32,27 +40,27 @@ int First_In=0;
 //针距离孔的高度				下降前停留时间		是否下降				下降速度	  	  		下降后停留时间
 POINTS record_points[10] = 
 {
-	//50,		2000,		0,		100,		0,		{0},
 	
-	3,		500,		0,		100,		2000,		{A_X_P,A_Y_P,1,A_X_P,1,A_Y_P},  //  A
+	3,		2000,		1,		100,		2000,		{D_Y_P,D_X_P,1,D_Y_P,1,D_X_P},  //  D 1
 	
-	3,		2000,		0,		100,		2000,		{B_X_P,B_Y_P,1,B_X_P-A_X_P,1,B_Y_P-A_Y_P},  //  B
+	20,		2000,		0,		100,		2000,		{A_Y_P,A_X_P,0,ABS(A_Y_P-D_Y_P),0,ABS(A_X_P-D_X_P)},  //  A 0
+	
+	3,		2000,		1,		100,		2000,		{A_Y_P,A_X_P,1,ABS(A_Y_P-A_Y_P),1,ABS(A_X_P-A_X_P)},  //  A 1
+	
+	3,		2000,		0,		100,		2000,		{C_Y_P_P,C_X_P_P,1,ABS(C_Y_P_P-A_Y_P),1,ABS(C_X_P_P-A_X_P)},  //  C左侧0
+	
+	3,		2000,		1,		100,		2000,		{C_Y_P,C_X_P,1,ABS(C_Y_P-C_Y_P_P),1,ABS(C_X_P-C_X_P_P)},  //  C 1
+	
+	10,		2000,		0,		100,		2000,		{A_Y_P,A_X_P,0,ABS(A_Y_P-C_Y_P),0,ABS(A_X_P-C_X_P)},  //  A 0
+	
+	10,		2000,		1,		100,		5000,		{A_Y_P,A_X_P,1,ABS(A_Y_P-A_Y_P),1,ABS(A_X_P-A_X_P)},  //  A 1
 
-	10,		2000,		0,		100,		500,		{C_X_P,C_Y_P,1,C_X_P-B_X_P,1,C_Y_P-B_Y_P},  //  C
+	10,		2000,		0,		100,		2000,		{B_Y_P_P,B_X_P_P,1,ABS(B_Y_P_P-A_Y_P),1,ABS(B_X_P_P-A_X_P)},  //  B右侧 
 	
-	3,		500,		0,		100,		2000,		{D_X_P,D_Y_P,1,D_X_P-C_X_P,1,D_Y_P-C_Y_P},  //  D
+	20,		2000,		1,		100,		2000,		{B_Y_P,B_X_P,0,ABS(B_Y_P-B_Y_P_P),0,ABS(B_X_P-B_X_P_P)},  //  B 1
 	
-//	3,		500,		1,		100,		2000,		{0},  //D
-//	
-//	20,		2000,		1,		100,		2000,		{0},//d- 
-//	
-//	10,		2000,		1,		100,		2000,		{0},//d- 
-//	
-//	10,		2000,		1,		100,		2000,		{0},//d 
-//	
-//	10,		2000,		0,		100,		2000,		{0},//c
-
-
+  20,   2000,   0,    100,    2000,   {1000    ,   1000,0,ABS(B_Y_P-1000)        ,0,ABS(B_X_P-1000)},//
+	
 };
 
 
@@ -109,7 +117,7 @@ void FSM(void *pvParameters)
 //--------------------------------------FSM
     else if(AIR_L_LONG==1000)
     {
-        RobotState.VelocityMode=QUICK_MODE;
+      RobotState.VelocityMode=QUICK_MODE;
 			RobotState.RecordState.Show_Switch=Ok;
     }
 //--------------------------------------FSM
@@ -195,7 +203,7 @@ void FSM(void *pvParameters)
             if(RobotState.RecordState.Show_Switch==Ok)
         {
             int n;
-            for(n=0;n<4;n++)
+            for(n=0;n<ALL_POINT;n++)
 					{
 						task=n;
 						 XY_Action(n);//
