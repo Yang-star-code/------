@@ -1,14 +1,14 @@
 #include "include.h"
 #include "picture.h"
 
-#define  A_X_P   1668
-#define  A_Y_P   1176
-#define  B_X_P   1764
-#define  B_Y_P   2982
-#define  C_X_P   1764
-#define  C_Y_P   4014
-#define  D_X_P   1764
-#define  D_Y_P   4656
+#define  A_X_P   1452
+#define  A_Y_P   1794
+#define  B_X_P   1542
+#define  B_Y_P   3570
+#define  C_X_P   1542
+#define  C_Y_P   4614
+#define  D_X_P   1542
+#define  D_Y_P   5256
 
 Robot_State RobotState;
 Motor_State MotorState;
@@ -32,13 +32,13 @@ POINTS record_points[10] =
 {
 	//50,		2000,		0,		100,		0,		{0},
 	
-	3,		500,		1,		100,		2000,		{A_X_P,A_Y_P,1,A_X_P,1,A_Y_P},  //  A
+	3,		500,		0,		100,		2000,		{A_X_P,A_Y_P,1,A_X_P,1,A_Y_P},  //  A
 	
-	3,		2000,		1,		100,		2000,		{B_X_P,B_Y_P,1,B_X_P-A_X_P,1,B_Y_P-A_Y_P},  //  B
+	3,		2000,		0,		100,		2000,		{B_X_P,B_Y_P,1,B_X_P-A_X_P,1,B_Y_P-A_Y_P},  //  B
 
 	10,		2000,		0,		100,		500,		{C_X_P,C_Y_P,1,C_X_P-B_X_P,1,C_Y_P-B_Y_P},  //  C
 	
-	3,		500,		1,		100,		2000,		{D_X_P,D_Y_P,1,D_X_P-C_X_P,1,D_Y_P-C_Y_P},  //  D
+	3,		500,		0,		100,		2000,		{D_X_P,D_Y_P,1,D_X_P-C_X_P,1,D_Y_P-C_Y_P},  //  D
 	
 //	3,		500,		1,		100,		2000,		{0},  //D
 //	
