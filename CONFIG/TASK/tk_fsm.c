@@ -1,65 +1,79 @@
 #include "include.h"
 #include "picture.h"
 
-#define  A_Y_P   1433
-#define  B_Y_P   1481
-#define  B_Y_P_P 1481
-#define  C_Y_P   1481
-#define  C_Y_P_P 1481
-#define  D_Y_P   1500
 
+#define  A_Y_P_P   1400
+#define  A_Y_P     1476
+#define  B_Y_P_P_R 1476
+#define  B_Y_P     1476
+#define  B_Y_P_P   1200
+#define  C_Y_P     1506
+#define  C_Y_P_P   1506
+#define  D_Y_P     1506
+#define  D_Y_P_P   1506
+//´ÓÐ¡µ½´óÅÅ£¬Èç¹ûÊÇÅÔµãÔÚÇ°£¬ÔòÊÇ×ó²àµã£¬Èç¹ûÔÚºóÔòÊÇÓÒ²àµã
 
-#define  A_X_P   1803
-#define  B_X_P   3594
-#define  B_X_P_P 3794
-#define  C_X_P_P 4325
-#define  C_X_P   4625
-#define  D_X_P   5265
-int ALL_POINT=10;//Ö´ÐÐµÄ×ÜµãÊý
+#define  A_X_P_P    1600  
+#define  A_X_P      1818
+#define  B_X_P_P    3400
+#define  B_X_P      3618
+#define  B_X_P_P_R  3800
+
+#define  C_X_P_P    4456
+#define  C_X_P      4638
+#define  D_X_P      5274
+#define  D_X_P_P    5600
+int ALL_POINT=12;//Ö´ÐÐµÄ×ÜµãÊý
 
 
 
 Robot_State RobotState;
 Motor_State MotorState;
-POINTS record_points[10] ;             //¶¨ÒåÒ»¸ö½á¹¹ÌåÊý×é£¬´æ·ÅµãµÄ×ø±ê¡¢ÒÔ¼°¸÷ÖÖ³ÉÔ±±äÁ¿
+POINTS record_points[12] ;             //¶¨ÒåÒ»¸ö½á¹¹ÌåÊý×é£¬´æ·ÅµãµÄ×ø±ê¡¢ÒÔ¼°¸÷ÖÖ³ÉÔ±±äÁ¿
 POINTS *RECORD_PTR = &record_points[0];    //Ê¹Ò»¸öÖ¸ÕëÖ¸Ïò½á¹¹ÌåÊý×éÃû£¨´ú±íÊý×éÊ×ÔªËØµØÖ·£© ÓÃÀ´´úÌæ²Ù×÷  ¼ÇÂ¼Ö¸Õë
 POINTS *BACK_PTR = NULL;        //»Ø³ÇÖ¸Õë ÏÈÖ¸Ïò¿Õ
 u8 Record_time=0;               //ÊÇµ±Ç°ÓÐÐ§¼ÇÂ¼µÄµãµÄ¸öÊý ´Ó0¿ªÊ¼
+u8 key=0;
 
 extern int Y_Part_Count;
 extern int X_Part_Count;
 extern int X_Total_Count;
 extern int Y_Total_Count;
-float Initial_Height=3;//³õÊ¼¸ß¶È
+float Initial_Height=155;//³õÊ¼¸ß¶È
 float total_time;
 float i=1.0;
-u8 key=0;
 int task=0;
 int First_In=0;
 //Current_Height£¨0-50£©   Before_Style_Time   Style_State 		Lifting_Speed 				After_Style_Time 
 //Õë¾àÀë¿×µÄ¸ß¶È				ÏÂ½µÇ°Í£ÁôÊ±¼ä		ÊÇ·ñÏÂ½µ				ÏÂ½µËÙ¶È	  	  		ÏÂ½µºóÍ£ÁôÊ±¼ä
-POINTS record_points[10] = 
+POINTS record_points[12] = 
 {
+	//6*5,		2000,		0,		100,		2000,		{0,         0,        1,       0,                      1,   0                 }, //¿Õ°×²½Öè
 	
-	3,		2000,		1,		100,		2000,		{D_Y_P,D_X_P,1,D_Y_P,1,D_X_P},  //  D 1
+  10*5,		2000,		0,		100,		2000,		{C_Y_P,      C_X_P,     1,       C_Y_P,                     1,   C_X_P                 },  //  C 0
 	
-	20,		2000,		0,		100,		2000,		{A_Y_P,A_X_P,0,ABS(A_Y_P-D_Y_P),0,ABS(A_X_P-D_X_P)},  //  A 0
+	5*5,		2000,		1,		100,		2000,		{C_Y_P,      C_X_P,     1,      ABS(C_Y_P-C_Y_P),           1,   ABS(C_X_P-C_X_P)   },  //  C 1
 	
-	3,		2000,		1,		100,		2000,		{A_Y_P,A_X_P,1,ABS(A_Y_P-A_Y_P),1,ABS(A_X_P-A_X_P)},  //  A 1
+	10*5,		2000,		0,		100,		2000,		{B_Y_P_P,    B_X_P_P,   0,       ABS(B_Y_P_P-C_Y_P),        0,   ABS(B_X_P_P-C_X_P)      },  //  B0 ×óÏÂ±ß
 	
-	3,		2000,		0,		100,		2000,		{C_Y_P_P,C_X_P_P,1,ABS(C_Y_P_P-A_Y_P),1,ABS(C_X_P_P-A_X_P)},  //  C×ó²à0
+	5*5,		2000,		0,		100,		2000,		{B_Y_P_P_R,  B_X_P_P_R, 1,     ABS(B_Y_P_P_R-B_Y_P_P),        1,   ABS(B_X_P_P_R-B_X_P_P)      },  //  B0 ÓÒ
 	
-	3,		2000,		1,		100,		2000,		{C_Y_P,C_X_P,1,ABS(C_Y_P-C_Y_P_P),1,ABS(C_X_P-C_X_P_P)},  //  C 1
+	10*5,		2000,		0,		100,		0,		  {B_Y_P_P_R,  B_X_P_P_R, 1,       ABS(B_Y_P_P_R-B_Y_P_P_R),  1,   ABS(B_X_P_P_R-B_X_P_P_R)    },  //  B0 B0ÓÒÉý¸ß
 	
-	10,		2000,		0,		100,		2000,		{A_Y_P,A_X_P,0,ABS(A_Y_P-C_Y_P),0,ABS(A_X_P-C_X_P)},  //  A 0
+	10*5,		500,		1,		100,		2000,		{B_Y_P,      B_X_P,       0,       ABS(B_Y_P-B_Y_P_P_R),      0,   ABS(B_X_P-B_X_P_P_R)    },  //  B1
 	
-	10,		2000,		1,		100,		5000,		{A_Y_P,A_X_P,1,ABS(A_Y_P-A_Y_P),1,ABS(A_X_P-A_X_P)},  //  A 1
+	10*5,		2000,		1,		100,		2000,		{D_Y_P,      D_X_P,       1,       ABS(D_Y_P-B_Y_P),          1,   ABS(D_X_P-B_X_P)    },  //  D1
+	 
+	10*5,		2000,		0,		100,		2000,		{A_Y_P_P,    A_X_P_P,     0,       ABS(A_Y_P_P-D_Y_P),        0,   ABS(A_X_P_P-D_X_P)      },  //  A×óÏÂ·½
+	
+	5*5,		2000,		0,		100,		 0,		  {A_Y_P_P,    A_X_P_P,     1,       ABS(A_Y_P_P-A_Y_P_P),      1,   ABS(A_X_P_P-A_X_P_P)      },  //  A×óÏÂÏÂÕëµ÷ÕûµÄ
+	
+	10*5,		2000,		0,		100,		 0,		  {A_Y_P_P,    A_X_P_P,     1,       ABS(A_Y_P_P-A_Y_P_P),      1,   ABS(A_X_P_P-A_X_P_P)      },  //  A×óÏÂÉý¸ßµ÷ÕûµÄ
+	 
+	10*5,		2000,		1,		100,		2000,		{A_Y_P,      A_X_P,       1,       ABS(A_Y_P-A_Y_P_P),        1,  ABS(A_X_P-A_X_P_P)      },  //  A1
 
-	10,		2000,		0,		100,		2000,		{B_Y_P_P,B_X_P_P,1,ABS(B_Y_P_P-A_Y_P),1,ABS(B_X_P_P-A_X_P)},  //  BÓÒ²à 
+	10*5,		2000,		0,		100,		2000,		{C_Y_P,      C_X_P,       1,       ABS(C_Y_P-A_Y_P),          1,  ABS(C_X_P-A_X_P)    },  //  C0
 	
-	20,		2000,		1,		100,		2000,		{B_Y_P,B_X_P,0,ABS(B_Y_P-B_Y_P_P),0,ABS(B_X_P-B_X_P_P)},  //  B 1
-	
-  20,   2000,   0,    100,    2000,   {1000    ,   1000,0,ABS(B_Y_P-1000)        ,0,ABS(B_X_P-1000)},//
 	
 };
 
@@ -205,7 +219,7 @@ void FSM(void *pvParameters)
             int n;
             for(n=0;n<ALL_POINT;n++)
 					{
-						task=n;
+						 task=n;
 						 XY_Action(n);//
 						 vTaskDelay(500);
 					}
@@ -379,6 +393,7 @@ void Back_To_Start_Demo(POINTS * Back_Ptr)//´«Èë×îºóÒ»¸öµãµÄµØÖ· ÒòÎª×îºóÒ»¸öµãµ
 		
        
 }
+
 //×ê¿×£¬Current_Height=18£¬¸Õµ½¿×£¬Current_Height=30
 //¸ß¶È8cm£¬ÏÂ½µËÙ¶È100£¨¼´360rpm£©Ê±£¬1.6Ãë×ßÍê£¬ÏÂ½µÍêÐèÒª9.6È¦
 //total_time=9.6/3.6/Lifting_Speed*60*1000
@@ -420,7 +435,7 @@ void Z_Action(int Current_Height,int Before_Style_Time,int Style_State,int Lifti
 	//pre_time=total_time/80*(current_height-25);
 	//Initial_Time=total_time/40*current_height;
 	Drilling_Time=500;//·µ»ØÔ­µãºóÏÂ½µÊ±¼ä
-	ABS_Adjust_Time=total_time*(Current_Height-3)/80;//Ã¿Ò»´Î»Øµ½¾ø¶Ô³õÊ¼µãµÄÊ±¼ä
+	ABS_Adjust_Time=total_time*(Current_Height-3*5)/80;//Ã¿Ò»´Î»Øµ½¾ø¶Ô³õÊ¼µãµÄÊ±¼ä
 	if(Style_State==1)
 	{
 		vTaskDelay(Before_Style_Time);//ÏÂÕëÇ°µÄµÈ´ýÊ±¼ä

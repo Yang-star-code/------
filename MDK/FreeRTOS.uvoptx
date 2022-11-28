@@ -162,18 +162,34 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>15</LineNumber>
+          <LineNumber>225</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134226062</Address>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\CONFIG\TASK\tk_fsm.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>223</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134224836</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>F:\Robocup楠ㄧ\RC-Test1\------\CONFIG\TASK\tk_Information.c</Filename>
+          <Filename>F:\Robocup楠ㄧ\RC-Test1\------\CONFIG\TASK\tk_fsm.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\LED\../CONFIG/TASK/tk_Information.c\15</Expression>
+          <Expression>\\LED\../CONFIG/TASK/tk_fsm.c\223</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -250,37 +266,27 @@
         <Ww>
           <count>14</count>
           <WinNumber>1</WinNumber>
-          <ItemText>RECORD_PTR</ItemText>
+          <ItemText>data,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>15</count>
           <WinNumber>1</WinNumber>
-          <ItemText>X_Total_Count,0x0A</ItemText>
+          <ItemText>key,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>16</count>
           <WinNumber>1</WinNumber>
-          <ItemText>X_Part_Count,0x0A</ItemText>
+          <ItemText>X_Total_Count,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>17</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Y_Total_Count,0x0A</ItemText>
+          <ItemText>X_Part_Count,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>18</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Y_Part_Count,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>19</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>data,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>20</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>key,0x0A</ItemText>
+          <ItemText>Y_Total_Count,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
